@@ -1,0 +1,120 @@
+﻿@model Blog
+    @{
+        ViewData["Title"] = "Index";
+    }
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>Product Detail Sayfası</title>
+    </head>
+    <style>
+        .main-image {
+            display: block;
+            width: 370px;
+            height: 500px;
+            border: 1px solid #ccc;
+            box-shadow: 0 0 5px #ccc;
+            margin-bottom: 10px;
+        }
+
+        .product-container {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            margin: 20px;
+            padding: 20px;
+            background-color: #fff;
+        }
+
+        .product-gallery {
+            display: flex;
+            width: 100%;
+            justify-content: space-around;
+            flex-direction: row;
+            justify-content: center;
+        }
+
+        .gallery-image {
+            width: 115px;
+            height: 115px;
+            border: 1px solid #ccc;
+            object-fit: cover;
+            cursor: pointer;
+        }
+
+            .gallery-image.active {
+                border-color: #008CBA;
+            }
+
+        .product-description {
+            width: 70%;
+            height: 600px;
+        }
+
+            .product-description h1 {
+                font-size: 36px;
+                font-weight: bold;
+                margin-bottom: 20px;
+            }
+
+            .product-description p {
+                font-size: 16px;
+                line-height: 1.5;
+                margin-bottom: 20px;
+                text-align: justify;
+                width: 600px;
+            }
+
+        .thumbnails {
+            width: 370px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .image-gallery {
+            width: max-content;
+        }
+
+    </style>
+    <body>
+        <div class="product-container">
+            <div class="image-gallery">
+                <img class="main-image" src="~/img/@Model.Image">
+            </div>
+            <div class="product-description">
+                <h1>@Model.Title</h1>
+                <p>@Model.Description</p>
+            </div>
+        </div>
+
+
+    </body>
+    <script>
+        const galleryImages = document.querySelectorAll(".gallery-image");
+        const mainImage = document.querySelector(".main-image");
+
+        // Set the main image to the first gallery image
+        mainImage.src = galleryImages[0].src;
+
+        // Add click listeners to each gallery image
+        galleryImages.forEach((image) => {
+            image.addEventListener("click", () => {
+                // Set the main image to the clicked gallery image
+                mainImage.src = image.src;
+
+                // Remove the "active" class from all gallery images
+                galleryImages.forEach((image) => {
+                    image.classList.remove("active");
+                });
+
+                // Add the "active" class to the clicked gallery image
+                image.classList.add("active");
+            });
+        });
+
+
+
+    </script>
+    </html>
+
